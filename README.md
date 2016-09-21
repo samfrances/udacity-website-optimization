@@ -5,11 +5,11 @@ For more information on the specification of the project, see [spec.md](spec.md)
 ## Optimizations
 
 - Relating to [index.html](index.html)
- + Added async attribute to google analytics script tag.
- + Added print media query to print css.
- + Inlined main stylesheet.
- + Removed Open Sans web font.
- + Scaled down pizzeria image used in index.html.
+ + Add async attribute to google analytics script tag.
+ + Add print media query to print css.
+ + Inline main stylesheet.
+ + Remove Open Sans web font.
+ + Scale down pizzeria image used in index.html.
 - Relating to [views/js/main.js](views/js/main.js)
  + Scrolling
     - Use `requestAnimationFrame` to wrap `updatePositions` before passing to the scroll event listener.
@@ -18,6 +18,6 @@ For more information on the specification of the project, see [spec.md](spec.md)
     - Add `will-change: left;` to `.mover` css class to create compositor layers for moving background pizzas.
         - For older browsers: `transform: translateZ(0);`
  + Resizing pizzas
-    - Removed `determineDx` function and replaced with simple percentage sizes.
-    - Resolved forced synchronous layouts relating to for-loop in `changePizzaSizes` function.
-    - Moved repeated query for `.randomPizzaContainer` out of for-loop in `changePizzaSizes` function.
+    - Remove `determineDx` function and replaced with simple percentage sizes.
+    - Resolve forced synchronous layouts relating to for-loop in `changePizzaSizes` function.
+    - Move repeated query for `.randomPizzaContainer` out of for-loop in `changePizzaSizes` function.
