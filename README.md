@@ -15,6 +15,8 @@ For more information on the specification of the project, see [spec.md](spec.md)
     - Use `requestAnimationFrame` to wrap `updatePositions` before passing to the scroll event listener.
     - In `updatePositions`, move line `var scrolltop = document.body.scrollTop / 1250;` outside
     of the for loop for avoid triggering forced synchronous layouts.
+    - Add `will-change: left;` to `.mover` css class to create compositor layers for moving background pizzas.
+        - For older browsers: `transform: translateZ(0);`
  + Resizing pizzas
     - Removed `determineDx` function and replaced with simple percentage sizes.
     - Resolved forced synchronous layouts relating to for-loop in `changePizzaSizes` function.

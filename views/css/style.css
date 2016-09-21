@@ -33,6 +33,9 @@ form {
   position: fixed;
   width: 256px;
   z-index: -1;
+  /* Optimisations for layer management, to increase fps of scroll animation */
+  will-change: left;
+  transform: translateZ(0);
 }
 
 .randomPizzaContainer {
