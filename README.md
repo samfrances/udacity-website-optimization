@@ -11,6 +11,8 @@ For more information on the specification of the project, see [spec.md](spec.md)
  + Remove Open Sans web font.
  + Scale down pizzeria image used in index.html.
 - Relating to [views/js/main.js](views/js/main.js)
+ + General
+    - Factor out querySelector and querySelectorAll.
  + Scrolling
     - Use `requestAnimationFrame` to wrap `updatePositions` before passing to the scroll event listener.
     - In `updatePositions`, move line `var scrolltop = document.body.scrollTop / 1250;` outside
