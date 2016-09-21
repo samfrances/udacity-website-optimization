@@ -521,7 +521,11 @@ window.addEventListener('scroll', function() { requestAnimationFrame(updatePosit
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 40; i++) {
+
+  // Number of pizzas =  the height of the viewpoint divided by 256, rounded up and multiplied by 8
+  var numPizzas = Math.ceil(window.innerHeight / 256) * 8;
+
+  for (var i = 0; i < numPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
