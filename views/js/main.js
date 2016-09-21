@@ -489,7 +489,7 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.getElementsByClassName('mover');
-  var scrolltop = document.body.scrollTop / 1250;
+  var scrolltop = (document.documentElement.scrollTop || document.body.scrollTop) / 1250;
 
   // Take the math for calculating the phase variable out of the loop and store
   // in an array
