@@ -423,13 +423,19 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
 
+    // Object to convert sizes to percentage values
     var sizeSwitcher = {
       1: 25,
       2: 33.3,
       3: 50
     };
 
+    // Removed all previous complicated logic, and just use percentages
+    // tosize pizzas
     var newwidth = sizeSwitcher[size] + "%";
+    // Query moved outside of loop
+    // document.querySelectorAll removed and replaced with more performant alternative,
+    // here and throughout this file.
     var randomPizzaContainer = document.getElementsByClassName("randomPizzaContainer");
     for (var i = 0, len = randomPizzaContainer.length; i < len; i++) {
       randomPizzaContainer[i].style.width = newwidth;
@@ -449,8 +455,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas"); // Removed from for-loop to optimize
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -485,11 +491,14 @@ function updatePositions() {
   var items = document.getElementsByClassName('mover');
   var scrolltop = document.body.scrollTop / 1250;
 
+  // Take the math for calculating the phase variable out of the loop and store
+  // in an array
   var phases = [];
   for (var i = 0; i < 5; i++) {
     phases.push( Math.sin(scrolltop + (i % 5)) );
   }
 
+  // Update pizza positions
   for (var i = 0; i < items.length; i++) {
     var phase = phases[i % 5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
