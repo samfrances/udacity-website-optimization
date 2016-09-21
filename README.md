@@ -19,7 +19,7 @@ For more information on the specification of the project, see [spec.md](spec.md)
     of the for loop for avoid triggering forced synchronous layouts.
     - Add `will-change: left;` to `.mover` css class to create compositor layers for moving background pizzas.
         - For older browsers: `transform: translateZ(0);`
-    - Reduce the number of moving pizzas to 48
+    - Reduce the number of moving pizzas to 40.
     - Precalculate the 5 different values of before the for-loop in `updatePositions`.
  + Resizing pizzas
     - Remove `determineDx` function and replaced with simple percentage sizes.
