@@ -2,6 +2,22 @@
 
 For more information on the specification of the project, see [spec.md](spec.md).
 
+## Running instructions
+
+### Option 1 - run without a server.
+
+There is no back-end component to this project, so you have the option of simply
+downloading the project, double-clicking on `index.html` and browsing locally.
+
+### Option 2 - Github pages
+
+You can view an online version of this project at
+[samfrances.github.io/udacity-website-optimization](https://samfrances.github.io/udacity-website-optimization)
+
+### Option 3 - server
+
+Download the files and place in the document root directory of your preferred server.
+
 ## Optimizations
 
 - Relating to [index.html](index.html)
