@@ -6,3 +6,4 @@ For more information on the specification of the project, see [spec.md](spec.md)
 
 - Added async attribute to google analytics script tag.
 - Added print media query to print css
+- Inlined main stylesheet
