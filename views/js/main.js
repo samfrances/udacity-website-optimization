@@ -489,6 +489,7 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.getElementsByClassName('mover');
+  // Fixed to allow animations to work in Firefox:
   var scrolltop = (document.documentElement.scrollTop || document.body.scrollTop) / 1250;
 
   // Take the math for calculating the phase variable out of the loop and store
@@ -499,9 +500,12 @@ function updatePositions() {
   }
 
   // Update pizza positions
+  var phrase;
+  var trans;
   for (var i = 0; i < items.length; i++) {
-    var phase = phases[i % 5];
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    phase = phases[i % 5];
+    trans = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.transform = "translateX(" + trans + ")";
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -534,6 +538,9 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("movingPizzas1").appendChild(elem);
+    elem.style.left = 0;
   }
   updatePositions();
+
+
 });
