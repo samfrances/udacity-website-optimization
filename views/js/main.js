@@ -483,28 +483,41 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
+// Global variable will hold moving pizzas, will be filled by DOMContentLoaded event listener below
+var items;
+
+// Global variable to throttle calls to update
+ticking = false;
+
+// Global variable to hold latest scroll position. Set by scroll event listener,
+// Used by updatePosition
+scrolltop = 0;
+
+// From: http://www.html5rocks.com/en/tutorials/speed/animations/
+function requestTick() {
+  if (!ticking) {
+    requestAnimationFrame(updatePositions);
+    ticking = true;
+  }
+}
+
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.getElementsByClassName('mover');
-  // Fixed to allow animations to work in Firefox:
-  var scrolltop = (document.documentElement.scrollTop || document.body.scrollTop) / 1250;
-
   // Take the math for calculating the phase variable out of the loop and store
   // in an array
   var phases = [];
   for (var i = 0; i < 5; i++) {
-    phases.push( Math.sin(scrolltop + (i % 5)) );
+    phases.push( 100 * Math.sin(scrolltop + (i % 5)) );
   }
 
   // Update pizza positions
   var phrase;
   var trans;
-  for (var i = 0; i < items.length; i++) {
-    phase = phases[i % 5];
-    trans = items[i].basicLeft + 100 * phase + 'px';
+  for (var i = 0, len = items.length; i < len; i++) {
+    trans = items[i].basicLeft + phases[i % 5] + 'px';
     items[i].style.transform = "translateX(" + trans + ")";
   }
 
@@ -516,10 +529,17 @@ function updatePositions() {
     var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
     logAverageFrame(timesToUpdatePosition);
   }
+
+  // Allow further requestAnimationFrames
+  ticking = false;
 }
 
 // runs updatePositions on scroll
-window.addEventListener('scroll', function() { requestAnimationFrame(updatePositions); });
+window.addEventListener('scroll', function() {
+  // Fixed to allow animations to work in Firefox:
+  scrolltop = (document.documentElement.scrollTop || document.body.scrollTop) / 1250;
+  requestTick();
+}, false);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
@@ -532,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < numPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
+    elem.src = "images/pizza_small.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
@@ -540,7 +560,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("movingPizzas1").appendChild(elem);
     elem.style.left = 0;
   }
-  updatePositions();
 
+  // Assign item as global variable
+  items = document.getElementsByClassName('mover');
+
+  updatePositions();
 
 });

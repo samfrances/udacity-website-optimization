@@ -33,11 +33,14 @@ Download the files and place in the document root directory of your preferred se
     - Use `requestAnimationFrame` to wrap `updatePositions` before passing to the scroll event listener.
     - In `updatePositions`, move line `var scrolltop = document.body.scrollTop / 1250;` outside
     of the for loop for avoid triggering forced synchronous layouts.
+    - Made scrolltop a global variable, refreshed by scroll event handler
     - Add `will-change: left;` to `.mover` css class to create compositor layers for moving background pizzas.
         - For older browsers: `transform: translateZ(0);`
     - Reduce the number of moving pizzas, calculated on the basis of `window.innerHeight`
-    - Precalculate the 5 different values of before the for-loop in `updatePositions`.
+    - Precalculate the 5 different values of phase before the for-loop in `updatePositions`.
     - Use CSS translateX to achieve animation
+    - Use technique to throttle calls to requestAnimationFrame from http://www.html5rocks.com/en/tutorials/speed/animations/
+    - Reduce size of pizza background image.
  + Resizing pizzas
     - Remove `determineDx` function and replaced with simple percentage sizes.
     - Resolve forced synchronous layouts relating to for-loop in `changePizzaSizes` function.
