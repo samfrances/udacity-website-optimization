@@ -515,7 +515,7 @@ function updatePositions() {
 
   // Update pizza positions
   for (var i = 0, len = items.length; i < len; i+=5) {
-    try { // Process pizzas in batches of 5
+    try { // Process pizzas in batches of 5, experimental attempt to improve perf
       items[i].style.transform = "translateX(" + phases[0] + "px)";
       items[i+1].style.transform = "translateX(" + phases[1] + "px)";
       items[i+2].style.transform = "translateX(" + phases[2] + "px)";

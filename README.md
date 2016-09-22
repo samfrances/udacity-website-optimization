@@ -41,6 +41,7 @@ Download the files and place in the document root directory of your preferred se
     - Use CSS translateX to achieve animation
     - Use technique to throttle calls to requestAnimationFrame from http://www.html5rocks.com/en/tutorials/speed/animations/
     - Reduce size of pizza background image.
+    - Experimental (not sure if this helps): Batch transform updates in groups of 5.
  + Resizing pizzas
     - Remove `determineDx` function and replaced with simple percentage sizes.
     - Resolve forced synchronous layouts relating to for-loop in `changePizzaSizes` function.
