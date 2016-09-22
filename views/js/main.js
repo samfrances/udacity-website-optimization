@@ -514,11 +514,16 @@ function updatePositions() {
   }
 
   // Update pizza positions
-  var phrase;
-  var trans;
-  for (var i = 0, len = items.length; i < len; i++) {
-    trans = phases[i % 5] + 'px';
-    items[i].style.transform = "translateX(" + trans + ")";
+  for (var i = 0, len = items.length; i < len; i+=5) {
+    try { // Process pizzas in batches of 5
+      items[i].style.transform = "translateX(" + phases[0] + "px)";
+      items[i+1].style.transform = "translateX(" + phases[1] + "px)";
+      items[i+2].style.transform = "translateX(" + phases[2] + "px)";
+      items[i+3].style.transform = "translateX(" + phases[3] + "px)";
+      items[i+4].style.transform = "translateX(" + phases[4] + "px)";
+    } catch(err) { // Catch error when we overrun the items array, and break out of loop
+      break;
+    }
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -564,6 +569,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Assign item as global variable
   items = document.getElementsByClassName('mover');
 
-  updatePositions();
+  requestTick();
 
 });
