@@ -510,7 +510,7 @@ function updatePositions() {
   // in an array
   var phases = [];
   for (var i = 0; i < 5; i++) {
-    phases.push( 100 * Math.sin(scrolltop + (i % 5)) );
+    phases.push( 100 * Math.sin(scrolltop + i ) );
   }
 
   // Update pizza positions

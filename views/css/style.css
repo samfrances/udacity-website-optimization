@@ -34,7 +34,7 @@ form {
   width: 256px;
   z-index: -1;
   /* Optimisations for layer management, to increase fps of scroll animation */
-  will-change: left;
+  will-change: transform;
   transform: translateZ(0);
 }
 
