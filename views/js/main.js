@@ -501,6 +501,7 @@ function requestTick() {
   }
 }
 
+var phases = [0,0,0,0,0];
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
@@ -508,9 +509,8 @@ function updatePositions() {
 
   // Take the math for calculating the phase variable out of the loop and store
   // in an array
-  var phases = [];
   for (var i = 0; i < 5; i++) {
-    phases.push( 100 * Math.sin(scrolltop + i ) );
+    phases[i] = 100 * Math.sin(scrolltop + i );
   }
 
   // Update pizza positions
