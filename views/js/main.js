@@ -558,8 +558,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Number of pizzas =  the height of the viewpoint divided by 256, rounded up and multiplied by 8
   var numPizzas = Math.ceil(window.innerHeight / s) * cols;
 
+  var elem;
   for (var i = 0; i < numPizzas; i++) {
-    var elem = document.createElement('img');
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza_small.png";
     elem.style.height = "100px";
