@@ -517,7 +517,7 @@ function updatePositions() {
   var phrase;
   var trans;
   for (var i = 0, len = items.length; i < len; i++) {
-    trans = items[i].basicLeft + phases[i % 5] + 'px';
+    trans = phases[i % 5] + 'px';
     items[i].style.transform = "translateX(" + trans + ")";
   }
 
@@ -558,7 +558,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("movingPizzas1").appendChild(elem);
-    elem.style.left = 0;
+    elem.style.left = (i % cols) * s + "px";
   }
 
   // Assign item as global variable
