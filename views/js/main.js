@@ -455,10 +455,14 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-var pizzasDiv = document.getElementById("randomPizzas"); // Removed from for-loop to optimize
+
+// Append to document fragment first to avoid page reflow
+// See: https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment
+var pizzasFrag = document.createDocumentFragment();
 for (var i = 2; i < 100; i++) {
-  pizzasDiv.appendChild(pizzaElementGenerator(i));
+  pizzasFrag.appendChild(pizzaElementGenerator(i));
 }
+document.getElementById("randomPizzas").appendChild(pizzasFrag);
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
@@ -501,7 +505,7 @@ function requestTick() {
   }
 }
 
-var phases = [0,0,0,0,0];
+var phases = [0,0,0,0,0]; // Kept as global variable in an attempt to avoid garbage collection slowdown
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
@@ -510,7 +514,7 @@ function updatePositions() {
   // Take the math for calculating the phase variable out of the loop and store
   // in an array
   for (var i = 0; i < 5; i++) {
-    phases[i] = 100 * Math.sin(scrolltop + i );
+    phases[i] = 100 * Math.sin(scrolltop + i);
   }
 
   // Update pizza positions
